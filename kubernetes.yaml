@@ -27,9 +27,17 @@ spec:
     spec:
       containers:
         - name: rails
-          image: hello-kubernetes/rails:3611881
+          image: hello-kubernetes/rails:58da317
           ports:
             - containerPort: 3000
+          env:
+            - name: MYSQL_HOST
+              value: mysql-service
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-credentials
+                  key: password
 ---
 apiVersion: v1
 kind: Service
